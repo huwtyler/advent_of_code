@@ -61,23 +61,18 @@ for i, line in enumerate(input):
                 if m.start() +j in symbol_positions[i+1]: #S
                     gear_adj.append([int(m.group()), [i+1, m.start() +j]])
 
-def find_matching_pairs(pair_list):
-    matching_pairs = []
 
-    for i in range(len(pair_list)):
-        current_pair = pair_list[i]
-        current_address = current_pair[1]
+matching_pairs = []
 
-        for j in range(i + 1, len(pair_list)):
-            compare_pair = pair_list[j]
-            compare_address = compare_pair[1]
+for i in range(len(gear_adj)):
+    current_pair = gear_adj[i]
+    current_address = current_pair[1]
 
-            if current_address == compare_address:
-                matching_pairs.append(current_pair[0] * compare_pair[0])
+    for j in range(i + 1, len(gear_adj)):
+        compare_pair = gear_adj[j]
+        compare_address = compare_pair[1]
 
-    return matching_pairs
+        if current_address == compare_address:
+            matching_pairs.append(current_pair[0] * compare_pair[0])
 
-matching_pairs = find_matching_pairs(gear_adj)
-
-# print(matching_pairs)
 print(sum(matching_pairs))
